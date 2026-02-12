@@ -22,6 +22,7 @@ const createTodo = async (req, res, next) => {
 
 const getTodos = async (req, res, next) => {
   const todos = await Todo.find({ user: req.userId }).sort({ createdAt: -1 });
+  res.set("Cache-Control", "no-store, no-cache, must-revalidate");
   res.status(200).json(todos);
 };
 

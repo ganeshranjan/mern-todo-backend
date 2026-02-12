@@ -7,11 +7,11 @@ const connectDB = require("./config/db");
 // Import the Express app
 const app = require("./app");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5001;
 
 connectDB().then(() => {
-//   require("./models/User");
-//   require("./models/Todo");
+  //   require("./models/User");
+  //   require("./models/Todo");
   console.log("✅ Models loaded successfully");
 });
 
