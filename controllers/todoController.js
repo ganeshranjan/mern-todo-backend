@@ -4,7 +4,6 @@ const createTodo = async (req, res, next) => {
   try {
     const { task, urgent } = req.body;
 
-    console.log("console 1", req, req.userId);
     if (!task) {
       return res.status(400).json({ message: "Task is required" });
     }
@@ -22,7 +21,6 @@ const createTodo = async (req, res, next) => {
 
 const getTodos = async (req, res, next) => {
   const todos = await Todo.find({ user: req.userId }).sort({ createdAt: -1 });
-  res.set("Cache-Control", "no-store, no-cache, must-revalidate");
   res.status(200).json(todos);
 };
 
