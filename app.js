@@ -16,7 +16,8 @@ app.use(express.json());
 // app.use(cors());
 
 const allowedOrigins = [
-  "http://localhost:5173",
+  "http://localhost:5173",   // Vite dev server
+  "http://localhost:3000",  // Docker frontend (nginx)
   "https://your-frontend.vercel.app"
 ];
 

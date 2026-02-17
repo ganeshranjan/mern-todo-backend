@@ -45,12 +45,13 @@ const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    console.log(
-      "Password match successful for user:",
-      user._id,
-      process.env.JWT_SECRET,
-    );
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    console.log("Password match successful for user:", user._id);
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      console.error("JWT_SECRET is not set. Set it in .env or pass -e JWT_SECRET=... when running Docker.");
+      return res.status(500).json({ message: "Server Error" });
+    }
+    const token = jwt.sign({ userId: user._id }, jwtSecret, {
       expiresIn: "1h",
     });
     console.log("User logged in successfully:", token, "userID:", user._id);

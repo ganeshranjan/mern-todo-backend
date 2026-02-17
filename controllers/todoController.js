@@ -20,8 +20,12 @@ const createTodo = async (req, res, next) => {
 };
 
 const getTodos = async (req, res, next) => {
-  const todos = await Todo.find({ user: req.userId }).sort({ createdAt: -1 });
-  res.status(200).json(todos);
+  try {
+    const todos = await Todo.find({ user: req.userId }).sort({ createdAt: -1 });
+    res.status(200).json(todos);
+  } catch (error) {
+    next(error);
+  }
 };
 
 const updateTodo = async (req, res, next) => {
